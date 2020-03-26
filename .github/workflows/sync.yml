@@ -1,14 +1,10 @@
 name: GIT
 on:
-  #schedule:
-  #  - cron:  '*/15 * * * *'
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
-
+  schedule:
+    - cron:  '*/30 * * * *'
+      
 jobs:
-  build:
+  sync:
     runs-on: ubuntu-latest
     steps:
     - name: Setup SSH Keys and known_hosts
@@ -27,9 +23,8 @@ jobs:
             git init .
             git remote add dest git@github.com:lttga/op.git
             git remote add src https://github.com/ProzorroUKR/openprocurement.api.git
-            git pull src master
-            git branch --set-upstream-to=src/master master
             git fetch --all
+            git branch --set-upstream-to=src/master master
             git checkout src/master
             git push -f -u dest master
             for branch in `git branch -r | grep -w -v ' src/master' |  grep -v ' dest/*' | sed 's/^[^\/]*\///g'`
