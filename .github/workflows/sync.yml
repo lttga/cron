@@ -34,7 +34,7 @@ jobs:
             #git checkout src/master
             git push -f -u dest master
             git push -f --tags dest
-            for branch in `git branch -r | grep -w -v ' src/master' | sed 's/^[^\/]*\///g'` 
+            for branch in `git branch -r | grep -w -v -E ' src/master| src/dependabot*' | sed 's/^[^\/]*\///g'` 
             do
               git checkout --track src/$branch
               git push -f -u dest $branch
