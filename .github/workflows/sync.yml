@@ -1,4 +1,4 @@
-name: GIT
+name: OP
 on:
   schedule:
     - cron:  '*/30 * * * *'
