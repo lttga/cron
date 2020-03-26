@@ -1,0 +1,39 @@
+name: GIT
+on:
+  schedule:
+    - cron:  '*/15 * * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Setup SSH Keys and known_hosts
+      env:
+            SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+      run: |
+            mkdir -p ~/.ssh
+            ssh-keyscan github.com >> ~/.ssh/known_hosts
+            ssh-agent -a $SSH_AUTH_SOCK > /dev/null
+            ssh-add - <<< "${{ secrets.SSH_PRIVATE_KEY }}"
+
+    - name: Sync repos
+      env:
+            SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+      run: |
+            git init .
+            git remote add dest git@github.com:lttga/op.git
+            git remote add src https://github.com/ProzorroUKR/openprocurement.api.git
+            git pull src master
+            git branch --set-upstream-to=src/master master
+            git checkout master
+            git pull --all
+            git fetch dest
+            git fetch src
+            for branch in `git branch -r | grep -w ' src/*' | sed 's/^[^\/]*\///g'` 
+            do
+              git checkout --track src/$branch
+              git push -f -u dest $branch
+            done
+            git remote rm dest
+            git remote rm src
+            git remote --verbose
