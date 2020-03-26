@@ -27,29 +27,24 @@ jobs:
             git init .
             git remote add dest git@github.com:lttga/op.git
             git remote add src https://github.com/ProzorroUKR/openprocurement.api.git
-            git remote add src_op https://github.com/openprocurement/ProzorroUKR-openprocurement.api.git
             git pull src master
             git branch --set-upstream-to=src/master master
             git fetch --all
-            #git checkout src/master
-            #git push -f -u dest master
-            git push -f --tags dest
-            for branch in `git branch -r | grep -w -v ' src/master' | grep -v 'dependabot*' | sed 's/^[^\/]*\///g'` 
+            git checkout src/master
+            git push -f -u dest master
+            for branch in `git branch -r | grep -w -v ' src/master' |  grep -v ' dest/*' | sed 's/^[^\/]*\///g'`
             do
               git checkout --track src/$branch
-              #git push -f -u dest $branch
             done
-            #git fetch src_op
-            #git branch --set-upstream-to=src_op/master master
-            #git checkout src_op/master
-            for branch in `git branch -r | grep -w ' src_op/feature-*' | sed 's/^[^\/]*\///g'` 
+            git remote rm src
+            git remote add src_op https://github.com/openprocurement/ProzorroUKR-openprocurement.api.git
+            git fetch src_op
+            for branch in `git branch -r | grep -w ' src_op/feature-*'  |  grep -v ' dest/*'  | sed 's/^[^\/]*\///g'`
             do
               git checkout --track src_op/$branch
-              #git push -f -u dest $branch
             done
             git push -f --all dest
             git push -f --tags dest
-            git remote rm src
-            git remote rm dest
             git remote rm src_op
-            git remote --verbose
+            git remote rm dest
+            
