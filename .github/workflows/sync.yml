@@ -30,8 +30,8 @@ jobs:
             #git remote add src_op https://github.com/openprocurement/ProzorroUKR-openprocurement.api.git
             git pull src master
             git branch --set-upstream-to=src/master master
-            git fetch dest
-            git fetch src
+            git fetch dest || true
+            git fetch src || true
             #git checkout src/master
             #git push -f -u dest master
             git push --tags dest
