@@ -1,11 +1,7 @@
-name: GIT
+name: OP2
 on:
   schedule:
-    - cron:  '*/15 * * * *'
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+    - cron:  '*/45 * * * *'
 
 jobs:
   build:
