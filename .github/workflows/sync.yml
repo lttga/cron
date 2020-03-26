@@ -34,10 +34,10 @@ jobs:
             #git checkout src/master
             git push -f -u dest master
             git push -f --tags dest
-            for branch in `git branch -r | grep -w -v -E ' src/master' | grep -v 'dependabot*' | sed 's/^[^\/]*\///g'` 
+            for branch in `git branch -r | grep -w -v ' src/master' | grep -v 'dependabot*' | sed 's/^[^\/]*\///g'` 
             do
               git checkout --track src/$branch
-              git push -f -u dest $branch
+              #git push -f -u dest $branch
             done
             #git fetch src_op
             #git branch --set-upstream-to=src_op/master master
@@ -45,8 +45,9 @@ jobs:
             for branch in `git branch -r | grep -w ' src_op/feature-*' | sed 's/^[^\/]*\///g'` 
             do
               git checkout --track src_op/$branch
-              git push -f -u dest $branch
+              #git push -f -u dest $branch
             done
+            git push -f --all dest
             git remote rm src
             git remote rm dest
             git remote rm src_op
