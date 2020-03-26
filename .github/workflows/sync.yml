@@ -28,7 +28,7 @@ jobs:
             git remote add dest git@github.com:lttga/op.git
             git remote add src https://github.com/ProzorroUKR/openprocurement.api.git
             git remote add src_op https://github.com/openprocurement/ProzorroUKR-openprocurement.api.git
-            git branch sync
+            git branch master
             git pull --all
             git fetch dest
             git fetch src
