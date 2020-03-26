@@ -1,7 +1,7 @@
 name: GIT
 on:
-  schedule:
-    - cron:  '*/15 * * * *'
+  #schedule:
+  #  - cron:  '*/15 * * * *'
   push:
     branches: [ master ]
   pull_request:
@@ -34,8 +34,9 @@ jobs:
             git pull --all
             git fetch dest
             git fetch src
-            git fetch src_op
-            for branch in `git branch -r | grep -w ' src/*' | sed 's/^[^\/]*\///g'` 
+            git fetch src_op 
+            git push -f -u dest master
+            for branch in `git branch -r | grep -w -E ' src/master' | sed 's/^[^\/]*\///g'` 
             do
               git checkout --track src/$branch
               git push -f -u dest $branch
