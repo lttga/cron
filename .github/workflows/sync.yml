@@ -29,8 +29,8 @@ jobs:
             git remote add src https://github.com/ProzorroUKR/openprocurement.api.git
             git remote add src_op https://github.com/openprocurement/ProzorroUKR-openprocurement.api.git
             git pull src master
-            git branch --set-upstream-to=src/master master_sync
-            git checkout master_sync
+            git branch --set-upstream-to=src/master master
+            git checkout master
             git pull --all
             git fetch dest
             git fetch src
