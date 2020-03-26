@@ -32,7 +32,7 @@ jobs:
             git branch --set-upstream-to=src/master master
             git fetch --all
             #git checkout src/master
-            git push -f -u dest master
+            #git push -f -u dest master
             git push -f --tags dest
             for branch in `git branch -r | grep -w -v ' src/master' | grep -v 'dependabot*' | sed 's/^[^\/]*\///g'` 
             do
@@ -48,6 +48,7 @@ jobs:
               #git push -f -u dest $branch
             done
             git push -f --all dest
+            git push -f --tags dest
             git remote rm src
             git remote rm dest
             git remote rm src_op
