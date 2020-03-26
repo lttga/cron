@@ -42,7 +42,7 @@ jobs:
             done
             git fetch src_op
             #git branch --set-upstream-to=src_op/master master
-            #git checkout master
+            git checkout src_op/master
             for branch in `git branch -r | grep -w ' src_op/feature-*' | sed 's/^[^\/]*\///g'` 
             do
               git checkout --track src_op/$branch
