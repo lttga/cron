@@ -34,7 +34,7 @@ jobs:
             git fetch src || true
             #git checkout src/master
             #git push -f -u dest master
-            git push --tags dest
+            git push -f --tags dest || true
             for branch in `git branch -r | grep -w -E ' src/master' | sed 's/^[^\/]*\///g'` 
             do
               git checkout --track src/$branch
