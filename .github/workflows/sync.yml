@@ -31,7 +31,6 @@ jobs:
             git pull src master
             git branch --set-upstream-to=src/master master
             git checkout master
-            git pull --all
             git fetch dest
             git fetch src
             git push -f -u dest master
