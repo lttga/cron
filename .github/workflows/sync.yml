@@ -27,16 +27,13 @@ jobs:
             git init .
             git remote add dest git@github.com:lttga/op.git
             git remote add src https://github.com/ProzorroUKR/openprocurement.api.git
-            #git remote add src_op https://github.com/openprocurement/ProzorroUKR-openprocurement.api.git
+            git remote add src_op https://github.com/openprocurement/ProzorroUKR-openprocurement.api.git
             git pull src master
             git branch --set-upstream-to=src/master master
-            git fetch src || true
-            echo "done src"
-            git fetch dest || true
-            echo "done dest"
+            git fetch --all
             #git checkout src/master
-            #git push -f -u dest master
-            #git push -f --tags dest || true
+            git push -f -u dest master
+            git push -f --tags dest
             for branch in `git branch -r | grep -w -v ' src/master' | sed 's/^[^\/]*\///g'` 
             do
               git checkout --track src/$branch
@@ -45,12 +42,12 @@ jobs:
             #git fetch src_op
             #git branch --set-upstream-to=src_op/master master
             #git checkout src_op/master
-            #for branch in `git branch -r | grep -w ' src_op/feature-*' | sed 's/^[^\/]*\///g'` 
-            #do
-            #  git checkout --track src_op/$branch
-            #  git push -f -u dest $branch
-            #done
+            for branch in `git branch -r | grep -w ' src_op/feature-*' | sed 's/^[^\/]*\///g'` 
+            do
+              git checkout --track src_op/$branch
+              git push -f -u dest $branch
+            done
             git remote rm src
             git remote rm dest
-            #git remote rm src_op
+            git remote rm src_op
             git remote --verbose
