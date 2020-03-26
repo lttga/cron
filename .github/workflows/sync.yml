@@ -32,8 +32,8 @@ jobs:
             git branch --set-upstream-to=src/master master
             git fetch dest
             git fetch src
-            git checkout src/master
-            git push -f -u dest master
+            #git checkout src/master
+            #git push -f -u dest master
             git push --tags dest
             for branch in `git branch -r | grep -w -E ' src/master' | sed 's/^[^\/]*\///g'` 
             do
