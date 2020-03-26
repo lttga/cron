@@ -33,15 +33,17 @@ jobs:
             git checkout master
             git fetch dest
             git fetch src
-            git push -f -u dest master
-            git push --tags dest
+            #git push -f -u dest master
+            #git push --tags dest
             for branch in `git branch -r | grep -w -E ' src/master' | sed 's/^[^\/]*\///g'` 
             do
               git checkout --track src/$branch
               git push -f -u dest $branch
             done
             git remote rm src
-            git fetch src_op 
+            git fetch src_op
+            git branch --set-upstream-to=src_op/master master
+            git checkout master
             for branch in `git branch -r | grep -w ' src_op/feature-*' | sed 's/^[^\/]*\///g'` 
             do
               git checkout --track src/$branch
