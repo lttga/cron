@@ -24,8 +24,9 @@ jobs:
             git remote add dest git@github.com:lttga/op.git
             git remote add src https://github.com/ProzorroUKR/openprocurement.api.git
             git fetch --all
+            git pull src master
             git branch --set-upstream-to=src/master master
-            git checkout master
+            git checkout src/master
             git push -f -u dest master
             for branch in `git branch -r | grep -w -v ' src/master' |  grep -v ' dest/*' | sed 's/^[^\/]*\///g'`
             do
