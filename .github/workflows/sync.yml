@@ -34,7 +34,6 @@ jobs:
             git pull --all
             git fetch dest
             git fetch src
-            git fetch src_op 
             git push -f -u dest master
             git push --tags dest
             for branch in `git branch -r | grep -w -E ' src/master' | sed 's/^[^\/]*\///g'` 
@@ -42,12 +41,13 @@ jobs:
               git checkout --track src/$branch
               git push -f -u dest $branch
             done
+            git remote rm src
+            git fetch src_op 
             for branch in `git branch -r | grep -w ' src_op/feature-*' | sed 's/^[^\/]*\///g'` 
             do
               git checkout --track src/$branch
               git push -f -u dest $branch
             done
             git remote rm dest
-            git remote rm src
             git remote rm src_op
             git remote --verbose
