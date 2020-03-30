@@ -21,7 +21,7 @@ jobs:
             SSH_AUTH_SOCK: /tmp/ssh_agent.sock
       run: |
             git init .
-            git remote add dest git@github.com:lttga/op.git
+            git remote add dest git@github.com:lttga/openprocurement.api.git
             git remote add src https://github.com/ProzorroUKR/openprocurement.api.git
             git fetch --all
             git pull src master
