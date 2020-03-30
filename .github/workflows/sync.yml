@@ -27,7 +27,6 @@ jobs:
             git pull src master
             git branch --set-upstream-to=src/master master
             git checkout src/master
-            git pull
             git push -f -u dest master
             for branch in `git branch -r | grep -w -v ' src/master' |  grep -v ' dest/*' | sed 's/^[^\/]*\///g'`
             do
